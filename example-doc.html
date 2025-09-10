@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Zap - Schedule Management Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .code-block {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .nav-link.active {
+            @apply bg-blue-100 text-blue-700;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-gray-900">Laravel Zap</h1>
+                    </div>
+                    <div class="ml-4">
+                        <span class="text-sm text-gray-500">Schedule Management for Laravel</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">v1.0</span>
+                    <a href="https://github.com/laraveljutsu/zap" class="text-gray-500 hover:text-gray-700">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex gap-8">
+            <!-- Sidebar Navigation -->
+            <nav class="w-64 flex-shrink-0">
+                <div class="sidebar bg-white rounded-lg border border-gray-200 p-4">
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Overview</a></li>
+                        <li><a href="#installation" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Installation</a></li>
+                        <li><a href="#quick-start" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Quick Start</a></li>
+                        <li><a href="#schedule-types" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Schedule Types</a></li>
+                        <li><a href="#builder-api" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Builder API</a></li>
+                        <li><a href="#validation-rules" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Validation Rules</a></li>
+                        <li><a href="#configuration" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Configuration</a></li>
+                        <li><a href="#conflict-detection" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Conflict Detection</a></li>
+                        <li><a href="#recurring-schedules" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Recurring Schedules</a></li>
+                        <li><a href="#availability-checking" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Availability Checking</a></li>
+                        <li><a href="#querying-schedules" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Querying Schedules</a></li>
+                        <li><a href="#use-cases" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Use Cases</a></li>
+                        <li><a href="#events" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Events</a></li>
+                        <li><a href="#performance" class="nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Performance</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="flex-1 max-w-none">
+                <div class="bg-white rounded-lg border border-gray-200">
+                    <div class="p-8 space-y-12">
+
+                        <!-- Overview -->
+                        <section id="overview">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                            <div class="prose max-w-none">
+                                <p class="text-lg text-gray-600 mb-6">
+                                    Laravel Zap is a flexible, performant schedule management system that provides deep Laravel integration
+                                    with Eloquent models, validation rules, conflict detection, and recurring schedules.
+                                </p>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-blue-900 mb-3">Key Features</h3>
+                                        <ul class="text-blue-800 space-y-2">
+                                            <li>• Eloquent model integration with HasSchedules trait</li>
+                                            <li>• Flexible validation rules with per-schedule overrides</li>
+                                            <li>• Smart conflict detection with customizable buffers</li>
+                                            <li>• Recurring schedule support (daily, weekly, monthly)</li>
+                                            <li>• Multiple schedule types (availability, appointment, blocked)</li>
+                                            <li>• Availability checking and time slot generation</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-green-900 mb-3">Requirements</h3>
+                                        <ul class="text-green-800 space-y-2">
+                                            <li>• PHP 8.2+</li>
+                                            <li>• Laravel 11.0+</li>
+                                            <li>• Carbon 2.0+ or 3.0+</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Installation -->
+                        <section id="installation">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Installation</h2>
+
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">1. Install the Package</h3>
+                            <pre class="code-block"><code class="language-bash">composer require laraveljutsu/zap</code></pre>
+
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 mt-8">2. Publish and Run Migrations</h3>
+                            <pre class="code-block"><code class="language-bash"># Publish migrations
+php artisan vendor:publish --tag=zap-migrations
+
+# Run migrations
+php artisan migrate
+
+# Optional: Publish configuration
+php artisan vendor:publish --tag=zap-config</code></pre>
+
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 mt-8">3. Add the Trait to Your Models</h3>
+                            <pre class="code-block"><code class="language-php"><?php
+
+use Zap\Models\Concerns\HasSchedules;
+
+class User extends Authenticatable
+{
+    use HasSchedules;
+
+    // Your model code...
+}</code></pre>
+                        </section>
+
+                        <!-- Quick Start -->
+                        <section id="quick-start">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Quick Start</h2>
+
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Basic Schedule Creation</h3>
+                            <pre class="code-block"><code class="language-php">use Zap\Facades\Zap;
+
+$user = User::find(1);
+
+// Simple one-time schedule
+$schedule = Zap::for($user)
+    ->named('Doctor Appointment')
+    ->description('Annual checkup')
+    ->from('2025-03-15')
+    ->addPeriod('09:00', '10:00')
+    ->save();</code></pre>
+
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 mt-8">Recurring Schedule</h3>
+                            <pre class="code-block"><code class="language-php">// Weekly team meeting
+$meeting = Zap::for($user)
+    ->named('Team Standup')
+    ->from('2025-01-01')
+    ->to('2025-12-31')
+    ->addPeriod('09:00', '09:30')
+    ->weekly(['monday', 'wednesday', 'friday'])
+    ->save();</code></pre>
+
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 mt-8">Schedule with Validation Rules</h3>
+                            <pre class="code-block"><code class="language-php">$schedule = Zap::for($user)
+    ->named('Client Meeting')
+    ->from('2025-03-15')
+    ->addPeriod('14:00', '16:00')
+    ->noOverlap()                      // Prevent conflicts
+    ->workingHoursOnly('09:00', '18:00')  // Business hours only
+    ->maxDuration(240)                 // Max 4 hours
+    ->withMetadata([
+        'location' => 'Conference Room A',
+        'priority' => 'high'
+    ])
+    ->save();</code></pre>
+                        </section>
+
+                        <!-- Schedule Types -->
+                        <section id="schedule-types">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Schedule Types</h2>
+                            <p class="text-gray-600 mb-8">Laravel Zap supports four distinct schedule types to handle different scheduling scenarios:</p>
+
+                            <div class="space-y-8">
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-3">1. Availability Schedules</h3>
+                                    <p class="text-gray-600 mb-4">Working hours or open time slots that <strong>allow overlaps</strong>. Perfect for defining when someone is available.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Doctor's Office Hours</h4>
+                                            <pre class="code-block"><code class="language-php">$availability = Zap::for($doctor)
+    ->named('Office Hours')
+    ->availability()
+    ->from('2025-01-01')
+    ->to('2025-12-31')
+    ->addPeriod('09:00', '12:00') // Morning
+    ->addPeriod('14:00', '17:00') // Afternoon
+    ->weekly(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Flexible Consultant Hours</h4>
+                                            <pre class="code-block"><code class="language-php">$flexible = Zap::for($consultant)
+    ->named('Available for Calls')
+    ->availability()
+    ->from('2025-01-01')
+    ->addPeriod('08:00', '20:00') // Long availability window
+    ->daily()
+    ->withMetadata(['timezone' => 'America/New_York'])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-3">2. Appointment Schedules</h3>
+                                    <p class="text-gray-600 mb-4">Actual bookings that <strong>prevent overlaps</strong>. These are concrete appointments scheduled within availability windows.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Patient Appointment</h4>
+                                            <pre class="code-block"><code class="language-php">$appointment = Zap::for($doctor)
+    ->named('Patient A - Checkup')
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '11:00')
+    ->withMetadata([
+        'patient_id' => 1,
+        'appointment_type' => 'checkup',
+        'notes' => 'Annual physical examination'
+    ])
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Client Meeting</h4>
+                                            <pre class="code-block"><code class="language-php">$meeting = Zap::for($salesperson)
+    ->named('ABC Corp - Product Demo')
+    ->appointment()
+    ->from('2025-01-20')
+    ->addPeriod('15:00', '16:30')
+    ->withMetadata([
+        'client_id' => 'abc-corp',
+        'meeting_type' => 'demo',
+        'preparation_time' => 30
+    ])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-3">3. Blocked Schedules</h3>
+                                    <p class="text-gray-600 mb-4">Unavailable time periods that <strong>prevent overlaps</strong>. Used for lunch breaks, holidays, or maintenance.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Lunch Break</h4>
+                                            <pre class="code-block"><code class="language-php">$lunchBreak = Zap::for($doctor)
+    ->named('Lunch Break')
+    ->blocked()
+    ->from('2025-01-01')
+    ->to('2025-12-31')
+    ->addPeriod('12:00', '13:00')
+    ->weekly(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Vacation Block</h4>
+                                            <pre class="code-block"><code class="language-php">$vacation = Zap::for($employee)
+    ->named('Summer Vacation')
+    ->blocked()
+    ->from('2025-07-01')
+    ->to('2025-07-15')
+    ->addPeriod('00:00', '23:59') // Entire day blocked
+    ->withMetadata([
+        'type' => 'vacation',
+        'approved_by' => 'manager@company.com'
+    ])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-3">4. Custom Schedules</h3>
+                                    <p class="text-gray-600 mb-4">Default type for backward compatibility. Behavior depends on explicit rules.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: With Overlap Prevention</h4>
+                                            <pre class="code-block"><code class="language-php">$custom = Zap::for($user)
+    ->named('Important Event')
+    ->custom() // or ->type('custom')
+    ->from('2025-01-15')
+    ->addPeriod('15:00', '16:00')
+    ->noOverlap() // Explicitly prevent overlaps
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Flexible Custom Schedule</h4>
+                                            <pre class="code-block"><code class="language-php">$flexible = Zap::for($user)
+    ->named('Flexible Time Block')
+    ->custom()
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '12:00')
+    ->withRule('no_overlap', ['enabled' => false]) // Allow overlaps
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Builder API -->
+                        <section id="builder-api">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Builder API</h2>
+                            <p class="text-gray-600 mb-8">The ScheduleBuilder provides a fluent API for creating schedules with various configuration options.</p>
+
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Basic Methods</h3>
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Method</th>
+                                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
+                                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Example</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-900">for($model)</td>
+                                                    <td class="px-6 py-4 text-sm text-gray-700">Set the schedulable model</td>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-600">->for($user)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-900">named($name)</td>
+                                                    <td class="px-6 py-4 text-sm text-gray-700">Set schedule name</td>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-600">->named('Meeting')</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-900">description($desc)</td>
+                                                    <td class="px-6 py-4 text-sm text-gray-700">Set schedule description</td>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-600">->description('Team meeting')</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-900">from($date)</td>
+                                                    <td class="px-6 py-4 text-sm text-gray-700">Set start date</td>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-600">->from('2025-01-01')</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-900">to($date)</td>
+                                                    <td class="px-6 py-4 text-sm text-gray-700">Set end date</td>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-600">->to('2025-12-31')</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-900">between($start, $end)</td>
+                                                    <td class="px-6 py-4 text-sm text-gray-700">Set both start and end dates</td>
+                                                    <td class="px-6 py-4 text-sm font-mono text-gray-600">->between('2025-01-01', '2025-12-31')</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Period Management</h3>
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Single Period</h4>
+                                            <pre class="code-block"><code class="language-php">$schedule = Zap::for($user)
+    ->named('Morning Meeting')
+    ->from('2025-01-15')
+    ->addPeriod('09:00', '10:30')
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Multiple Periods</h4>
+                                            <pre class="code-block"><code class="language-php">$schedule = Zap::for($user)
+    ->named('Split Schedule')
+    ->from('2025-01-15')
+    ->addPeriods([
+        ['start_time' => '09:00', 'end_time' => '12:00'],
+        ['start_time' => '14:00', 'end_time' => '17:00'],
+    ])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Schedule Types</h3>
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Explicit Type Setting</h4>
+                                            <pre class="code-block"><code class="language-php">// Using helper methods
+$schedule = Zap::for($user)
+    ->availability()  // or ->appointment(), ->blocked(), ->custom()
+    ->named('Office Hours')
+    ->save();
+
+// Using type() method
+$schedule = Zap::for($user)
+    ->type('appointment')
+    ->named('Client Meeting')
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Type-Specific Behavior</h4>
+                                            <pre class="code-block"><code class="language-php">// Availability allows overlaps by default
+$availability = Zap::for($doctor)
+    ->availability()
+    ->named('Available Hours')
+    ->addPeriod('09:00', '17:00')
+    ->save();
+
+// Appointments prevent overlaps by default
+$appointment = Zap::for($doctor)
+    ->appointment()
+    ->named('Patient Visit')
+    ->addPeriod('10:00', '11:00')
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Metadata and State</h3>
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Adding Metadata</h4>
+                                            <pre class="code-block"><code class="language-php">$schedule = Zap::for($user)
+    ->named('Client Meeting')
+    ->withMetadata([
+        'client_id' => 123,
+        'location' => 'Conference Room A',
+        'priority' => 'high',
+        'attendees' => ['john@email.com', 'jane@email.com']
+    ])
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Schedule State</h4>
+                                            <pre class="code-block"><code class="language-php">// Create inactive schedule
+$draft = Zap::for($user)
+    ->named('Draft Schedule')
+    ->inactive()
+    ->from('2025-01-15')
+    ->addPeriod('09:00', '10:00')
+    ->save();
+
+// Explicitly set as active (default)
+$active = Zap::for($user)
+    ->named('Active Schedule')
+    ->active()
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Validation Rules -->
+                        <section id="validation-rules">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Validation Rules</h2>
+                            <p class="text-gray-600 mb-8">Laravel Zap provides comprehensive validation rules that can be configured globally or overridden per schedule.</p>
+
+                            <div class="space-y-8">
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">No Overlap Rule</h3>
+                                    <p class="text-gray-600 mb-4">Prevents schedule conflicts by checking for overlapping time periods.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Enabled (Default for Appointments)</h4>
+                                            <pre class="code-block"><code class="language-php">// Explicitly enable overlap checking
+$schedule = Zap::for($user)
+    ->named('Important Meeting')
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '11:00')
+    ->noOverlap()  // Prevent overlaps
+    ->save();
+
+// This will throw ScheduleConflictException if overlaps exist
+try {
+    $conflicting = Zap::for($user)
+        ->named('Another Meeting')
+        ->from('2025-01-15')
+        ->addPeriod('10:30', '11:30') // Overlaps with above
+        ->noOverlap()
+        ->save();
+} catch (ScheduleConflictException $e) {
+    $conflicts = $e->getConflictingSchedules();
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Disabled for Special Cases</h4>
+                                            <pre class="code-block"><code class="language-php">// Allow overlapping schedules for emergency situations
+$emergency = Zap::for($user)
+    ->named('Emergency Response')
+    ->from('2025-01-15')
+    ->addPeriod('10:30', '12:00') // Can overlap with existing schedules
+    ->withRule('no_overlap', ['enabled' => false])
+    ->save();
+
+// Availability schedules allow overlaps by default
+$availability = Zap::for($doctor)
+    ->availability()  // This type allows overlaps automatically
+    ->named('General Availability')
+    ->from('2025-01-15')
+    ->addPeriod('09:00', '17:00')
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Working Hours Rule</h3>
+                                    <p class="text-gray-600 mb-4">Ensures schedules are created only within specified business hours.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Standard Business Hours</h4>
+                                            <pre class="code-block"><code class="language-php">// Only allow scheduling between 9 AM and 5 PM
+$schedule = Zap::for($user)
+    ->named('Business Meeting')
+    ->from('2025-01-15')
+    ->addPeriod('14:00', '15:00') // Valid: within working hours
+    ->workingHoursOnly('09:00', '17:00')
+    ->save();
+
+// This will fail validation
+try {
+    $afterHours = Zap::for($user)
+        ->named('After Hours Meeting')
+        ->from('2025-01-15')
+        ->addPeriod('19:00', '20:00') // Invalid: outside working hours
+        ->workingHoursOnly('09:00', '17:00')
+        ->save();
+} catch (InvalidScheduleException $e) {
+    echo $e->getMessage(); // Working hours validation error
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Extended Hours for Special Cases</h4>
+                                            <pre class="code-block"><code class="language-php">// Healthcare with extended hours
+$medicalSchedule = Zap::for($doctor)
+    ->named('Extended Clinic Hours')
+    ->from('2025-01-15')
+    ->addPeriod('07:00', '19:00') // Extended hours
+    ->workingHoursOnly('07:00', '19:00')
+    ->save();
+
+// Disable working hours rule for emergency
+$emergency = Zap::for($doctor)
+    ->named('Emergency Surgery')
+    ->from('2025-01-15')
+    ->addPeriod('23:00', '03:00') // Middle of the night
+    ->withRule('working_hours', ['enabled' => false])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Maximum Duration Rule</h3>
+                                    <p class="text-gray-600 mb-4">Limits the maximum duration of individual schedule periods.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Standard Meeting Limit</h4>
+                                            <pre class="code-block"><code class="language-php">// Limit meetings to 2 hours maximum
+$meeting = Zap::for($user)
+    ->named('Project Discussion')
+    ->from('2025-01-15')
+    ->addPeriod('09:00', '10:30') // 1.5 hours - valid
+    ->maxDuration(120) // 120 minutes = 2 hours max
+    ->save();
+
+// This will fail validation
+try {
+    $longMeeting = Zap::for($user)
+        ->named('All Day Workshop')
+        ->from('2025-01-15')
+        ->addPeriod('09:00', '17:00') // 8 hours - too long
+        ->maxDuration(120) // Only 2 hours allowed
+        ->save();
+} catch (InvalidScheduleException $e) {
+    echo $e->getMessage(); // Duration validation error
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Extended Duration for Special Events</h4>
+                                            <pre class="code-block"><code class="language-php">// Conference with full-day sessions
+$conference = Zap::for($user)
+    ->named('Annual Conference')
+    ->from('2025-01-15')
+    ->addPeriod('08:00', '18:00') // 10 hours
+    ->maxDuration(600) // 10 hours allowed for special events
+    ->save();
+
+// Remove duration limits entirely
+$unlimited = Zap::for($user)
+    ->named('Flexible Work Block')
+    ->from('2025-01-15')
+    ->addPeriod('08:00', '20:00') // 12 hours - no limit
+    ->withRule('max_duration', ['enabled' => false])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">No Weekends Rule</h3>
+                                    <p class="text-gray-600 mb-4">Prevents scheduling on weekends (Saturday and/or Sunday).</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Business Hours Only (No Weekends)</h4>
+                                            <pre class="code-block"><code class="language-php">// Standard business schedule - weekdays only
+$businessMeeting = Zap::for($user)
+    ->named('Weekly Team Meeting')
+    ->from('2025-01-01') // Wednesday
+    ->addPeriod('09:00', '10:00')
+    ->noWeekends() // Prevents Saturday and Sunday scheduling
+    ->weekly(['monday', 'wednesday', 'friday'])
+    ->save();
+
+// This will fail validation
+try {
+    $weekendMeeting = Zap::for($user)
+        ->named('Weekend Meeting')
+        ->from('2025-01-04') // Saturday
+        ->addPeriod('10:00', '11:00')
+        ->noWeekends()
+        ->save();
+} catch (InvalidScheduleException $e) {
+    echo $e->getMessage(); // Weekend validation error
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Allow Weekend Work</h4>
+                                            <pre class="code-block"><code class="language-php">// Retail business - weekends allowed
+$retailSchedule = Zap::for($employee)
+    ->named('Weekend Shift')
+    ->from('2025-01-04') // Saturday
+    ->addPeriod('09:00', '17:00')
+    ->withRule('no_weekends', ['enabled' => false])
+    ->save();
+
+// Healthcare - 24/7 operations
+$hospitalShift = Zap::for($nurse)
+    ->named('Weekend Coverage')
+    ->from('2025-01-01')
+    ->to('2025-12-31')
+    ->addPeriod('08:00', '20:00')
+    ->withRule('no_weekends', ['enabled' => false])
+    ->daily() // Includes weekends
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Configuration -->
+                        <section id="configuration">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Configuration</h2>
+                            <p class="text-gray-600 mb-8">Configure Laravel Zap behavior through the <code class="bg-gray-100 px-2 py-1 rounded text-sm">config/zap.php</code> file. Every setting can be customized to fit your application's needs.</p>
+
+                            <div class="space-y-8">
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Default Rules Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Configure which validation rules are enabled by default and their behavior.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Strict Business Environment</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'default_rules' => [
+    'no_overlap' => [
+        'enabled' => true,
+        'applies_to' => [
+            \Zap\Enums\ScheduleTypes::APPOINTMENT,
+            \Zap\Enums\ScheduleTypes::BLOCKED,
+            \Zap\Enums\ScheduleTypes::CUSTOM, // Also check custom schedules
+        ],
+    ],
+    'working_hours' => [
+        'enabled' => true, // Enforce business hours
+        'start' => '08:00',
+        'end' => '18:00',
+        'timezone' => 'America/New_York',
+    ],
+    'max_duration' => [
+        'enabled' => true, // Limit meeting length
+        'minutes' => 240, // 4 hours max
+    ],
+    'no_weekends' => [
+        'enabled' => true, // No weekend scheduling
+        'saturday' => true,
+        'sunday' => true,
+    ],
+],</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Flexible Healthcare Environment</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'default_rules' => [
+    'no_overlap' => [
+        'enabled' => true,
+        'applies_to' => [
+            \Zap\Enums\ScheduleTypes::APPOINTMENT, // Only appointments
+            // Availability can overlap for multiple doctors
+        ],
+    ],
+    'working_hours' => [
+        'enabled' => false, // 24/7 healthcare
+        'start' => '00:00',
+        'end' => '23:59',
+        'timezone' => null, // Use app timezone
+    ],
+    'max_duration' => [
+        'enabled' => true,
+        'minutes' => 480, // 8 hours for surgeries
+    ],
+    'no_weekends' => [
+        'enabled' => false, // Allow weekend care
+        'saturday' => false,
+        'sunday' => false,
+    ],
+],</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Conflict Detection Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Control how schedule conflicts are detected and handled.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Strict Conflict Detection</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'conflict_detection' => [
+    'enabled' => true,
+    'buffer_minutes' => 15, // 15-minute buffer between appointments
+    'auto_resolve' => false, // Don't automatically resolve conflicts
+    'strict_mode' => true, // Throw exceptions on conflicts
+],
+
+// Usage example:
+$appointment1 = Zap::for($doctor)
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '11:00')
+    ->save();
+
+// This will fail due to 15-minute buffer
+try {
+    $appointment2 = Zap::for($doctor)
+        ->appointment()
+        ->from('2025-01-15')
+        ->addPeriod('11:00', '12:00') // No 15-min gap
+        ->save();
+} catch (ScheduleConflictException $e) {
+    // Handle conflict
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Lenient Conflict Detection</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'conflict_detection' => [
+    'enabled' => true,
+    'buffer_minutes' => 0, // No buffer required
+    'auto_resolve' => true, // Attempt automatic resolution
+    'strict_mode' => false, // Log conflicts but don't throw exceptions
+],
+
+// Usage example:
+$appointment1 = Zap::for($consultant)
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '11:00')
+    ->save();
+
+// This will succeed with warnings logged
+$appointment2 = Zap::for($consultant)
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('11:00', '12:00') // Exact adjacent timing allowed
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Recurring Schedule Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Configure how recurring schedules are processed and managed.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Conservative Recurring Setup</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'recurring' => [
+    'process_days_ahead' => 14, // Only 2 weeks ahead
+    'cleanup_expired_after_days' => 30, // Quick cleanup
+    'max_instances' => 100, // Limit instances
+    'supported_frequencies' => ['daily', 'weekly'], // Limited frequencies
+],
+
+// Usage example:
+$dailyMeeting = Zap::for($user)
+    ->named('Daily Standup')
+    ->from('2025-01-01')
+    ->to('2025-01-31') // Short-term recurring
+    ->addPeriod('09:00', '09:15')
+    ->daily()
+    ->save();
+
+// Only generates instances for next 14 days</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Extensive Recurring Setup</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'recurring' => [
+    'process_days_ahead' => 365, // Full year ahead
+    'cleanup_expired_after_days' => 180, // Keep history longer
+    'max_instances' => 2000, // High limit for large organizations
+    'supported_frequencies' => ['daily', 'weekly', 'monthly', 'yearly'],
+],
+
+// Usage example:
+$yearlyReview = Zap::for($employee)
+    ->named('Annual Performance Review')
+    ->from('2025-01-01')
+    ->to('2030-01-01') // Multi-year recurring
+    ->addPeriod('14:00', '16:00')
+    ->yearly()
+    ->save();
+
+// Generates instances for full year ahead</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Validation Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Fine-tune validation behavior and limits.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Restrictive Validation</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'validation' => [
+    'require_future_dates' => true, // Must be future
+    'max_date_range' => 90, // 3 months max
+    'min_period_duration' => 30, // 30 minutes minimum
+    'max_period_duration' => 240, // 4 hours maximum
+    'max_periods_per_schedule' => 10, // Simple schedules
+    'allow_overlapping_periods' => false, // No internal overlaps
+],
+
+// Usage example - this will fail:
+try {
+    $invalidSchedule = Zap::for($user)
+        ->named('Invalid Schedule')
+        ->from('2024-12-01') // Past date - fails validation
+        ->to('2025-06-01') // > 90 days - fails validation
+        ->addPeriod('09:00', '09:15') // < 30 min - fails validation
+        ->save();
+} catch (InvalidScheduleException $e) {
+    // Multiple validation errors
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Permissive Validation</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'validation' => [
+    'require_future_dates' => false, // Allow past scheduling
+    'max_date_range' => 1095, // 3 years max
+    'min_period_duration' => 5, // 5 minutes minimum
+    'max_period_duration' => 1440, // 24 hours maximum
+    'max_periods_per_schedule' => 100, // Complex schedules
+    'allow_overlapping_periods' => true, // Allow internal overlaps
+],
+
+// Usage example - complex schedule allowed:
+$complexSchedule = Zap::for($user)
+    ->named('Historical Training Data')
+    ->from('2024-01-01') // Past date allowed
+    ->to('2027-01-01') // Long range allowed
+    ->addPeriods([
+        ['start_time' => '09:00', 'end_time' => '09:10'], // 10 min
+        ['start_time' => '09:05', 'end_time' => '09:15'], // Overlapping
+        ['start_time' => '10:00', 'end_time' => '22:00'], // 12 hours
+        // ... up to 100 periods
+    ])
+    ->save();</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Cache Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Configure caching for better performance with frequent schedule queries.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: High-Performance Caching</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'cache' => [
+    'enabled' => true,
+    'ttl' => 1800, // 30 minutes
+    'prefix' => 'zap_schedule_',
+    'tags' => ['zap', 'schedules', 'high-perf'],
+    'store' => 'redis', // Use Redis for fast access
+],
+
+// Usage - queries will be cached:
+$schedules = $user->schedulesForDate('2025-01-15');
+// First call hits database
+$schedules = $user->schedulesForDate('2025-01-15');
+// Second call uses cache
+
+// Clear cache when needed:
+Cache::tags(['zap', 'schedules'])->flush();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Minimal Caching</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'cache' => [
+    'enabled' => true,
+    'ttl' => 300, // 5 minutes only
+    'prefix' => 'zap_',
+    'tags' => ['zap'],
+    'store' => null, // Use default cache store
+],
+
+// For applications with frequently changing schedules
+// where fresh data is more important than performance
+
+// Or disable caching entirely:
+'cache' => [
+    'enabled' => false,
+    'ttl' => 0,
+    'prefix' => '',
+    'tags' => [],
+    'store' => null,
+],</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Time Slots Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Configure default settings for time slot generation and availability checking.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Standard Office Environment</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'time_slots' => [
+    'default_duration' => 60, // 1-hour meetings
+    'min_duration' => 15, // 15-minute minimum
+    'max_duration' => 240, // 4-hour maximum
+    'business_hours' => [
+        'start' => '09:00',
+        'end' => '17:00',
+    ],
+    'slot_intervals' => [15, 30, 60], // Common meeting lengths
+],
+
+// Usage:
+$slots = $user->getAvailableSlots('2025-01-15');
+// Returns 1-hour slots between 9 AM - 5 PM
+
+$customSlots = $user->getAvailableSlots(
+    date: '2025-01-15',
+    slotDuration: 30 // 30-minute meetings
+);</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Healthcare Environment</h4>
+                                            <pre class="code-block"><code class="language-php">// config/zap.php
+'time_slots' => [
+    'default_duration' => 30, // 30-minute appointments
+    'min_duration' => 15, // Quick consultations
+    'max_duration' => 480, // Surgery time blocks
+    'business_hours' => [
+        'start' => '07:00', // Early start
+        'end' => '19:00', // Extended hours
+    ],
+    'slot_intervals' => [15, 30, 45, 60, 120, 240], // Flexible appointment types
+],
+
+// Usage:
+$doctorSlots = $doctor->getAvailableSlots(
+    date: '2025-01-15',
+    dayStart: '07:00',
+    dayEnd: '19:00',
+    slotDuration: 30 // 30-minute appointments
+);
+
+// Find next surgery slot
+$surgerySlot = $surgeon->getNextAvailableSlot(
+    duration: 240, // 4-hour surgery block
+    dayStart: '08:00',
+    dayEnd: '16:00'
+);</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Conflict Detection -->
+                        <section id="conflict-detection">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Conflict Detection</h2>
+                            <p class="text-gray-600 mb-8">Laravel Zap provides intelligent conflict detection to prevent scheduling overlaps and ensure data integrity.</p>
+
+                            <div class="space-y-8">
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Basic Conflict Detection</h3>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Automatic Conflict Prevention</h4>
+                                            <pre class="code-block"><code class="language-php">$user = User::find(1);
+
+// Create first appointment
+$appointment1 = Zap::for($user)
+    ->named('Client Meeting A')
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '11:00')
+    ->save();
+
+// This will throw ScheduleConflictException
+try {
+    $appointment2 = Zap::for($user)
+        ->named('Client Meeting B')
+        ->appointment()
+        ->from('2025-01-15')
+        ->addPeriod('10:30', '11:30') // Overlaps with first appointment
+        ->save();
+} catch (ScheduleConflictException $e) {
+    echo $e->getMessage();
+    $conflicts = $e->getConflictingSchedules();
+    foreach ($conflicts as $conflict) {
+        echo "Conflicts with: " . $conflict->name;
+    }
+}</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Manual Conflict Checking</h4>
+                                            <pre class="code-block"><code class="language-php">// Check for conflicts before creating
+$user = User::find(1);
+
+// Build schedule without saving
+$proposedSchedule = Zap::for($user)
+    ->named('Proposed Meeting')
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('10:30', '11:30')
+    ->build();
+
+// Check for conflicts manually
+$conflicts = Zap::findConflicts($proposedSchedule['schedulable'], $proposedSchedule);
+
+if (empty($conflicts)) {
+    // Safe to create
+    $schedule = Zap::for($user)
+        ->named('Proposed Meeting')
+        ->appointment()
+        ->from('2025-01-15')
+        ->addPeriod('10:30', '11:30')
+        ->save();
+} else {
+    // Handle conflicts
+    echo "Cannot schedule: conflicts found";
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Buffer Time Configuration</h3>
+                                    <p class="text-gray-600 mb-4">Add buffer time between appointments to allow for setup, cleanup, or travel time.</p>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 1: Medical Appointments with Buffer</h4>
+                                            <pre class="code-block"><code class="language-php">// Configure 15-minute buffer between appointments
+config(['zap.conflict_detection.buffer_minutes' => 15]);
+
+$doctor = User::find(1);
+
+// First appointment: 10:00 - 11:00
+$appointment1 = Zap::for($doctor)
+    ->named('Patient A')
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('10:00', '11:00')
+    ->save();
+
+// This will fail - not enough buffer time
+try {
+    $appointment2 = Zap::for($doctor)
+        ->named('Patient B')
+        ->appointment()
+        ->from('2025-01-15')
+        ->addPeriod('11:00', '12:00') // Only 0 minutes gap
+        ->save();
+} catch (ScheduleConflictException $e) {
+    echo "Need 15-minute buffer between appointments";
+}
+
+// This will succeed - 15+ minute gap
+$appointment2 = Zap::for($doctor)
+    ->named('Patient B')
+    ->appointment()
+    ->from('2025-01-15')
+    ->addPeriod('11:15', '12:15') // 15-minute buffer
+    ->save();</code></pre>
+                                        </div>
+
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 mb-2">Example 2: Travel Time
