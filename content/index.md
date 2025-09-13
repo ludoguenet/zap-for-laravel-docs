@@ -3,36 +3,11 @@ seo:
   title: Laravel Zap - The Missing Schedule Management System For Laravel
   description: A flexible, performant, and developer-friendly schedule management system for Laravel. Created by Ludovic Guénet. (Laravel Jutsu)
   ogImage: '/social-card.png'
+  bodyAttrs:
+    data-route: /
 ---
 
-::u-page-hero
-#title
-The Missing Schedule Management System For Laravel
-
-#description
-A flexible, performant, and developer-friendly schedule management system with deep Laravel integration.
-
-#links
-  :::u-button
-  ---
-  color: neutral
-  size: xl
-  to: /getting-started/installation
-  trailing-icon: i-lucide-arrow-right
-  ---
-  Get started
-  :::
-
-  :::u-button
-  ---
-  color: neutral
-  icon: simple-icons-github
-  size: xl
-  to: https://github.com/ludoguenet/laravel-zap
-  variant: outline
-  ---
-  Star on GitHub
-  :::
+::CustomPageHero
 ::
 
 ::u-page-section

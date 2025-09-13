@@ -2,6 +2,10 @@ export default defineNuxtConfig({
     extends: ['docus'],
     modules: ['@nuxt/ui-pro'],
     css: ['~/assets/css/main.css'],
+    colorMode: {
+        preference: 'light',
+        fallback: 'light',
+    },
     app: {
         head: {
             link: [
@@ -18,7 +22,7 @@ export default defineNuxtConfig({
                 { name: 'description', content: 'A flexible, performant, and developer-friendly schedule management system for Laravel. Created by Ludovic Guénet.' },
                 { name: 'keywords', content: 'Laravel, Schedule Management, PHP, Appointment Booking, Availability, Laravel Zap' },
                 { name: 'author', content: 'Ludovic Guénet' },
-                
+
                 // Open Graph / Facebook
                 { property: 'og:type', content: 'website' },
                 { property: 'og:title', content: 'Laravel Zap - The Missing Schedule Management System For Laravel' },
@@ -26,7 +30,7 @@ export default defineNuxtConfig({
                 { property: 'og:image', content: '/social-card.png' },
                 { property: 'og:url', content: 'https://laravel-zap.dev' },
                 { property: 'og:site_name', content: 'Laravel Zap' },
-                
+
                 // Twitter Card
                 { name: 'twitter:card', content: 'summary_large_image' },
                 { name: 'twitter:title', content: 'Laravel Zap - The Missing Schedule Management System For Laravel' },
@@ -34,12 +38,12 @@ export default defineNuxtConfig({
                 { name: 'twitter:image', content: '/social-card.png' },
                 { name: 'twitter:creator', content: '@LaravelJutsu' },
                 { name: 'twitter:site', content: '@LaravelJutsu' },
-                
+
                 // Additional SEO
                 { name: 'robots', content: 'index, follow' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                 { name: 'theme-color', content: '#f59e0b' },
-                
+
                 // PWA
                 { name: 'mobile-web-app-capable', content: 'yes' },
                 { name: 'apple-mobile-web-app-capable', content: 'yes' },
