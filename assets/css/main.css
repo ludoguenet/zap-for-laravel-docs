@@ -4,15 +4,3 @@
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
 }
-
-/* Hide dark mode toggle */
-[data-testid="color-scheme-toggle"],
-.color-scheme-toggle,
-[class*="color-scheme"],
-[class*="dark-mode"],
-button[aria-label*="dark"],
-button[aria-label*="light"],
-button[title*="dark"],
-button[title*="light"] {
-  display: none !important;
-}
