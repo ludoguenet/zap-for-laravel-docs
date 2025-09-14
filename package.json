@@ -1,5 +1,5 @@
 {
-  "name": "laravel-zap-documentation",
+  "name": "zap-for-laravel-documentation",
   "scripts": {
     "dev": "nuxt dev --extends docus",
     "build": "nuxt build --extends docus"

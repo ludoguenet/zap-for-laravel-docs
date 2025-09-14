@@ -23,7 +23,7 @@ This is the official documentation site for Zap, built with Docus to provide a c
 ```bash
 # Clone the documentation
 git clone https://github.com/ludoguenet/zap-for-laravel-docs.git
-cd laravel-zap-docs
+cd zap-for-laravel-docs
 
 # Install dependencies
 npm install
@@ -37,7 +37,7 @@ Your documentation site will be running at `http://localhost:3000`
 ## 📁 Documentation Structure
 
 ```
-laravel-zap-docs/
+zap-for-laravel-docs/
 ├── content/
 │   ├── index.md                    # Homepage - Zap introduction
 │   ├── 1.installation.md           # Installation and setup guide
@@ -118,7 +118,7 @@ This documentation is for the Zap package. To install and use Zap in your projec
 composer require laraveljutsu/zap
 ```
 
-- **Package Repository**: [ludoguenet/laravel-zap](https://github.com/ludoguenet/zap-for-laravel)
+- **Package Repository**: [ludoguenet/zap-for-laravel](https://github.com/ludoguenet/zap-for-laravel)
 - **Author**: [Ludovic Guénet](https://ludovicguenet.dev)
 - **License**: MIT
 

@@ -28,7 +28,7 @@ export default defineNuxtConfig({
                 { property: 'og:title', content: 'Zap for Laravel - The Missing Calendar Management System For Laravel' },
                 { property: 'og:description', content: 'A flexible, performant, and developer-friendly calendar management system for Laravel. Created by Ludovic Guénet.' },
                 { property: 'og:image', content: '/social-card.png' },
-                { property: 'og:url', content: 'https://laravel-zap.dev' },
+                { property: 'og:url', content: 'https://zap-for-laravel.com' },
                 { property: 'og:site_name', content: 'Zap for Laravel' },
 
                 // Twitter Card
