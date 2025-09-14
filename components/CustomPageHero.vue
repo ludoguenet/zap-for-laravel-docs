@@ -15,13 +15,13 @@
                 <span class="relative">Missing</span>
               </span>
             </span>
-            <span class="inline-block">Schedule Management System For Laravel</span>
+            <span class="inline-block">Calendar Management System For Laravel</span>
           </h1>
         </div>
 
         <p class="mx-auto mt-9 max-w-4xl text-xl text-slate-700 dark:text-slate-300 sm:mt-6">
           <span class="inline-block">A flexible, performant, and developer-friendly</span>
-          <span class="inline-block">schedule management system with deep Laravel integration.</span>
+          <span class="inline-block">calendar management system with deep Laravel integration.</span>
         </p>
 
         <div class="mt-5 sm:mt-8 flex flex-wrap gap-x-6 gap-y-3 justify-center">
@@ -34,7 +34,7 @@
           </div>
           <div class="rounded-md shadow">
             <a class="flex items-center justify-center px-6 py-2 md:px-8 md:py-3 text-base md:text-lg font-medium rounded-md text-white bg-amber-500 hover:bg-amber-600 focus:ring-2 ring-amber-500 dark:focus:ring-amber-600 focus:outline-none transition duration-150 ease-in-out"
-               href="https://github.com/ludoguenet/laravel-zap" rel="noopener" target="_blank">
+               href="https://github.com/ludoguenet/zap-for-laravel" rel="noopener" target="_blank">
               <Icon name="simple-icons-github" class="mr-2" />
               <span>Star on GitHub</span>
             </a>

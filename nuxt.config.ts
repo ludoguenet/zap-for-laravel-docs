@@ -19,22 +19,22 @@ export default defineNuxtConfig({
             ],
             meta: [
                 // Basic SEO
-                { name: 'description', content: 'A flexible, performant, and developer-friendly schedule management system for Laravel. Created by Ludovic Guénet.' },
-                { name: 'keywords', content: 'Laravel, Schedule Management, PHP, Appointment Booking, Availability, Laravel Zap' },
+                { name: 'description', content: 'A flexible, performant, and developer-friendly calendar management system for Laravel. Created by Ludovic Guénet.' },
+                { name: 'keywords', content: 'Laravel, Calendar Management, PHP, Appointment Booking, Availability, Zap for Laravel' },
                 { name: 'author', content: 'Ludovic Guénet' },
 
                 // Open Graph / Facebook
                 { property: 'og:type', content: 'website' },
-                { property: 'og:title', content: 'Laravel Zap - The Missing Schedule Management System For Laravel' },
-                { property: 'og:description', content: 'A flexible, performant, and developer-friendly schedule management system for Laravel. Created by Ludovic Guénet.' },
+                { property: 'og:title', content: 'Zap for Laravel - The Missing Calendar Management System For Laravel' },
+                { property: 'og:description', content: 'A flexible, performant, and developer-friendly calendar management system for Laravel. Created by Ludovic Guénet.' },
                 { property: 'og:image', content: '/social-card.png' },
                 { property: 'og:url', content: 'https://laravel-zap.dev' },
-                { property: 'og:site_name', content: 'Laravel Zap' },
+                { property: 'og:site_name', content: 'Zap for Laravel' },
 
                 // Twitter Card
                 { name: 'twitter:card', content: 'summary_large_image' },
-                { name: 'twitter:title', content: 'Laravel Zap - The Missing Schedule Management System For Laravel' },
-                { name: 'twitter:description', content: 'A flexible, performant, and developer-friendly schedule management system for Laravel. Created by Ludovic Guénet.' },
+                { name: 'twitter:title', content: 'Zap for Laravel - The Missing Calendar Management System For Laravel' },
+                { name: 'twitter:description', content: 'A flexible, performant, and developer-friendly calendar management system for Laravel. Created by Ludovic Guénet.' },
                 { name: 'twitter:image', content: '/social-card.png' },
                 { name: 'twitter:creator', content: '@LaravelJutsu' },
                 { name: 'twitter:site', content: '@LaravelJutsu' },
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
                 { name: 'mobile-web-app-capable', content: 'yes' },
                 { name: 'apple-mobile-web-app-capable', content: 'yes' },
                 { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-                { name: 'apple-mobile-web-app-title', content: 'Laravel Zap' }
+                { name: 'apple-mobile-web-app-title', content: 'Zap for Laravel' }
             ]
         }
     },

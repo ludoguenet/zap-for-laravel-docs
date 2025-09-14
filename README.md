@@ -1,18 +1,18 @@
-# Laravel Zap Documentation
+# Zap Documentation
 
-> Beautiful, comprehensive documentation for Laravel Zap - the missing schedule management package for Laravel
+> Beautiful, comprehensive documentation for Zap - the missing calendar management package for Laravel
 
-This is the official documentation site for Laravel Zap, built with Docus to provide a clean, modern, and developer-friendly experience for learning about Laravel's most powerful scheduling package.
+This is the official documentation site for Zap, built with Docus to provide a clean, modern, and developer-friendly experience for learning about Laravel's most powerful scheduling package.
 
 > [!TIP]
-> New to Laravel Zap? Start with the [Installation Guide](https://laravel-zap.com/installation) and [Quick Start](https://laravel-zap.com/quick-start) sections.
+> New to Zap? Start with the [Installation Guide](https://zap-for-laravel.com/installation) and [Quick Start](https://zap-for-laravel.com/quick-start) sections.
 
 ## ✨ Features
 
 - 🎨 **Beautiful Design** - Clean, modern documentation theme optimized for code examples
 - 📱 **Responsive** - Mobile-first design for coding on the go
 - 🌙 **Dark Mode** - Perfect for late-night coding sessions
-- 🔍 **Search** - Quickly find Laravel Zap methods and examples
+- 🔍 **Search** - Quickly find Zap methods and examples
 - 📝 **Rich Content** - Enhanced markdown with interactive code examples
 - 🎯 **Laravel-focused** - Tailored specifically for Laravel developers
 - ⚡ **Fast** - Optimized performance with Nuxt 4
@@ -22,7 +22,7 @@ This is the official documentation site for Laravel Zap, built with Docus to pro
 
 ```bash
 # Clone the documentation
-git clone https://github.com/ludoguenet/laravel-zap-docs.git
+git clone https://github.com/ludoguenet/zap-for-laravel-docs.git
 cd laravel-zap-docs
 
 # Install dependencies
@@ -39,7 +39,7 @@ Your documentation site will be running at `http://localhost:3000`
 ```
 laravel-zap-docs/
 ├── content/
-│   ├── index.md                    # Homepage - Laravel Zap introduction
+│   ├── index.md                    # Homepage - Zap introduction
 │   ├── 1.installation.md           # Installation and setup guide
 │   ├── 2.quick-start.md           # Quick start examples
 │   ├── 3.video-tutorials.md       # Video tutorials page
@@ -110,15 +110,15 @@ We welcome contributions to improve the documentation! Here's how:
 4. Test locally with `npm run dev`
 5. Submit a pull request
 
-## 📖 Laravel Zap Package
+## 📖 Zap Package
 
-This documentation is for the Laravel Zap package. To install and use Laravel Zap in your projects:
+This documentation is for the Zap package. To install and use Zap in your projects:
 
 ```bash
 composer require laraveljutsu/zap
 ```
 
-- **Package Repository**: [ludoguenet/laravel-zap](https://github.com/ludoguenet/laravel-zap)
+- **Package Repository**: [ludoguenet/laravel-zap](https://github.com/ludoguenet/zap-for-laravel)
 - **Author**: [Ludovic Guénet](https://ludovicguenet.dev)
 - **License**: MIT
 

@@ -1,7 +1,7 @@
 {
-  "name": "Laravel Zap Documentation",
-  "short_name": "Laravel Zap",
-  "description": "The Missing Schedule Management System For Laravel",
+  "name": "Zap for Laravel Documentation",
+  "short_name": "Zap for Laravel",
+  "description": "The Missing Calendar Management System For Laravel",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

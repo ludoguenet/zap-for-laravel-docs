@@ -10,12 +10,12 @@ export default defineAppConfig({
     linkedin: 'https://www.linkedin.com/in/ludoguenet',
   },
   github: {
-    url: 'https://github.com/ludoguenet/laravel-zap',
+    url: 'https://github.com/ludoguenet/zap-for-laravel',
     branch: 'main'
   },
   footer: {
     credits: {
-      name: 'Laravel Zap',
+      name: 'Zap for Laravel',
       to: 'https://ludovicguenet.dev',
       text: 'Created by Ludovic Guénet'
     },

@@ -1,7 +1,7 @@
 ---
 seo:
-  title: Laravel Zap - The Missing Schedule Management System For Laravel
-  description: A flexible, performant, and developer-friendly schedule management system for Laravel. Created by Ludovic Guénet. (Laravel Jutsu)
+  title: Zap for Laravel - The Missing Calendar Management System For Laravel
+  description: A flexible, performant, and developer-friendly calendar management system for Laravel. Created by Ludovic Guénet. (Laravel Jutsu)
   ogImage: '/social-card.png'
   bodyAttrs:
     data-route: /
