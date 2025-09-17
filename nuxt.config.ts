@@ -10,6 +10,7 @@ export default defineNuxtConfig({
         head: {
             link: [
                 // Favicon
+                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
                 { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
                 // Apple Touch Icon
