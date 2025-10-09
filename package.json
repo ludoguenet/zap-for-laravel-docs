@@ -1,13 +1,13 @@
 {
   "name": "zap-for-laravel-documentation",
   "scripts": {
-    "dev": "nuxt dev --extends docus",
-    "build": "nuxt build --extends docus"
+    "build": "nuxt build --extend docus",
+    "dev": "nuxt dev --extend docus"
   },
   "dependencies": {
     "@nuxt/ui-pro": "^3.3.5",
-    "better-sqlite3": "^12.2.0",
     "docus": "latest",
-    "nuxt": "^4.1.0"
+    "better-sqlite3": "^12.2.0",
+    "nuxt": "^4.0.0"
   }
 }
